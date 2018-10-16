@@ -200,16 +200,64 @@ var organizations = [
 
 <body>
 <!-- Feel free to add empty tags. Data shouldn't be here. -->
-	<div id="org_table"></div>
+    <div id="org_table"></div>
+    <input type="button" onclick="createTableFromJSON()" value="Create Table From JSON"/>
+    
 
 <script>
 // outputs the first item of the organizations array. Just for testing.
-console.log(organizations[0]); 
+console.log(organizations[0])
 
 // Your JavaScript code goes here
+
+function createTableFromJSON(){
+
+    // defines variables (columns)
+    var nonProfit = 0;
+    var orgAge = 0;
+    var northAmerica = 0;
+    var transportType = 0;
+    var size = 0;
+
+    // how many are in each category
+    for (var i = 0; i < organizations.length; i++) {
+        if (organizations[i]["Organization Type"] == "Nonprofit") {
+            nonProfit++; // should be 2
+        } if ((2018 - organizations[i]["Founding Year"]) < 10) {
+            orgAge++; // should be 8
+        } if (organizations[i]["Region"] == "North America") {
+            northAmerica++; // should be 6
+        } if (organizations[i]["Type of Data Used"] == "Transportation"){
+            transportType++; // should be 2
+        } if (organizations[i]["Size"] == "1 to 10") {
+            size++;
+        }
+    }
+
+    //creates table
+    document.write("<table border=1 align='center'>")
+
+    // row 1 (headings)
+    document.write("<tr><td>Number of Non-Profit Organizations</td>")
+    document.write("<td>Number of Organizations Less than 10 Years Old</td>")
+    document.write("<td>Number of Organizations in North America</td>")
+    document.write("<td>Number of Organizations using Tansportation Data</td>")
+    document.write("<td>Number of Organizations with Less than 10 People</td></tr>")
+    
+    // row 2 (numbers)
+    document.write("<tr><td>" + nonProfit + "</td>")
+    document.write("<td>" + orgAge + "</td>")
+    document.write("<td>" + northAmerica + "</td>")
+    document.write("<td>" + transportType + "</td>")
+    document.write("<td>" + size + "</td></tr></table>")
+
+    }
+
+
 
 
 </script>
 
 </body>
 </html>
+
